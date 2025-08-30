@@ -10,6 +10,7 @@ func main() {
 	pkg.InitDatabase()
 	
 	r := gin.Default()
+	r.Static("/uploads", "../uploads")
 	
 	r = routes.SetupRouter()
 	

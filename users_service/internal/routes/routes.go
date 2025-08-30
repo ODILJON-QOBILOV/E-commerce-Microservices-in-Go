@@ -16,6 +16,7 @@ func SetupRouter() *gin.Engine {
     auth.Use(utils.JWTAuth())
     {
         auth.GET("/profile", handlers.Profile)
+        auth.POST("/product/create", handlers.CreateProduct)
     }
 
     return r

@@ -15,6 +15,7 @@ func CreateProduct(c *gin.Context) {
 		Description string `form:"description"`
 		Price       int    `form:"price"`
 		Amount      int    `form:"amount"`
+		CategoryID  int    `form:"category_id"`
 	}
 
 	if err := c.ShouldBind(&input); err != nil {
@@ -40,6 +41,7 @@ func CreateProduct(c *gin.Context) {
 		Price:       input.Price,
 		Amount:      input.Amount,
 		Image:       imagePath,
+		CategoryId: input.CategoryID,
 	}
 
 	if err := pkg.DB.Create(&product).Error; err != nil {
@@ -48,7 +50,13 @@ func CreateProduct(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Product created successfully",
-		"product": product,
-	})
+		"Id": product.ID,
+		"title": product.Title,
+		"description": product.Description,
+		"price": product.Price,
+		"amount": product.Amount,
+		"image": product.Image,
+		"category_id": product.CategoryId,
+		"CreatedAt": product.CreatedAt,
+	},)
 }

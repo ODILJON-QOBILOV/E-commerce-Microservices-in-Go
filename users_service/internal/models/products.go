@@ -9,4 +9,7 @@ type Products struct {
 	Price       int
 	Amount      int
 	Image       string
+	
+	CategoryId  int
+	Category    Category
 }
